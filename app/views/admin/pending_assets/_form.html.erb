@@ -1,0 +1,21 @@
+<%= form_for [:admin, asset], :html => {class: 'form-inline'} do |f| %>
+  <%= render 'shared/error_messages', target: asset %>
+  <div class="form-group mr-sm-2" hidden="hidden">
+    <%= hidden_field_tag :user_id, asset.user_id, required: true %>
+    <%= hidden_field_tag :t, Time.now.to_i, required: true %>
+  </div>
+
+  <div class="form-group mr-sm-2">
+    <%= f.text_field :amount, class: 'form-control', required: true %>
+  </div>
+  <div class="form-group mr-sm-2">
+    <%= f.select(:asset_name,
+                 options_for_select([['YOYOW', 'yoyow']]),
+                 {prompt: '请选择资产'},
+                 class: 'form-control',
+                 required: true) %>
+  </div>
+  <div class="form-group">
+    <%= f.submit '登记资产', class: "btn btn-block btn-primary", 'data-disable-with' => '登记中..' %>
+  </div>
+<% end %>

@@ -1,0 +1,37 @@
+language: ruby
+
+addons:
+  postgresql: "9.4"
+
+services:
+  - postgresql
+  - memcached
+  - redis-server
+  - elasticsearch
+
+rvm:
+  - 2.5.0
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - rvm: ruby-head
+
+before_install:
+  - sed -i "s/gems.ruby-china.org/rubygems.org/g" Gemfile.lock
+  - psql -c "CREATE USER \"admin\" WITH CREATEDB PASSWORD 'admin';" -U postgres
+  - psql -c "create database \"homeland-test\" WITH OWNER=\"admin\";" -U postgres
+  - cp config/config.yml.default config/config.yml
+  - cp config/database.yml.default config/database.yml
+  - cp config/redis.yml.default config/redis.yml
+  - cp config/elasticsearch.yml.default config/elasticsearch.yml
+  - cp config/secrets.yml.default config/secrets.yml
+  - sed -i "s/SETUP_REDIS_HOST/127.0.0.1/g" config/redis.yml
+  - sed -i "s/SETUP_REDIS_PORT/6379/g" config/redis.yml
+
+before_script:
+  - RAILS_ENV=test bundle exec rake db:migrate
+
+script:
+  - bundle exec rubocop .
+  - RAILS_ENV=test bundle exec rake

@@ -1,0 +1,38 @@
+<%= render 'node_selector', node: @topic.node %>
+
+<%= form_for @topic, remote: true, class: "form", html: { tb: 'edit-topic' } do |f| %>
+  <%= render "shared/error_messages", target: @topic %>
+  <%= f.hidden_field :node_id %>
+
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <button type="button" class="btn btn-default" id="node-selector-button"
+          data-toggle="modal" data-target="#node-selector">
+          <%= @topic.node&.name || '选择节点...' %>
+        </button>
+      </div>
+      <%= f.text_field :title, class: "form-control", placeholder: "在这里填写标题" %>
+    </div>
+  </div>
+
+  <%= render "/shared/editor_toolbar" %>
+
+  <div class="form-group">
+    <%= f.text_area :body, class: "topic-editor form-control closewarning", rows: 20 %>
+  </div>
+
+  <% if Setting.has_module?(:team) %>
+    <% if current_user.team_collection.any? %>
+    <div class='form-group'>
+      <%= f.select :team_id, current_user.team_collection, { include_blank: "不要关联组织" }, { class: "form-control" } %>
+    </div>
+    <% end %>
+  <% end %>
+
+  <div class="form-actions hide-ios">
+    <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving"), 'data-tb' => "save-topic" %>
+
+    <div class="pull-right hide-ios"><a href="/markdown" target="_blank"><i class="fa fa-tip"></i> 排版说明</a></div>
+  </div>
+<% end %>

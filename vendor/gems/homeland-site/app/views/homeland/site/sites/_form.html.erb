@@ -1,0 +1,33 @@
+<div id="site" class="card">
+  <div class="card-header">提交导航</div>
+  <div class="card-body">
+    <%= form_for @site do |f| %>
+      <%= render "/shared/error_messages", target: @site  %>
+
+      <div class="form-group">
+        <%= f.label :site_node_id %>
+        <%= f.select :site_node_id, SiteNode.all.collect { |t| [t.name, t.id] }, { include_blank: false }, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :url %>
+        <%= f.url_field :url, placeholder: "http://", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :desc %>
+        <%= f.text_area :desc, rows: 3, class: "form-control" %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit '提交', class: "btn btn-primary", 'data-disable-with' => '提交中...' %>
+        <%= link_to '取消', sites_path, class: "btn btn-outline-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div id="recommend-banners" class="recommend-banners">
+  <main>
+    <div id="main-hot-banner" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <% posts.each_with_index do |post, idx| %>
+          <li data-target="#main-hot-banner" data-slide-to="<%= idx %>" class="<%= idx == 0 ? 'active' : '' %>"></li>
+        <% end %>
+      </ol>
+      <div class="carousel-inner">
+        <% posts.each_with_index do |post, idx| %>
+          <div class="<%= idx == 0 ? 'carousel-item active' : 'carousel-item' %>">
+            <a href="/posts/<%= post.to_param %>">
+              <img class="d-block w-100" src="<%= post.cover_image %>">
+            </a>
+          </div>
+        <% end %>
+      </div>
+      <a class="carousel-control-prev" href="#main-hot-banner" role="button" data-slide="prev">
+        <span aria-hidden="true"><i class="fa fa-chevron-left"></i> </span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#main-hot-banner" role="button" data-slide="next">
+        <span aria-hidden="true"><i class="fa fa-chevron-right"></i> </span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </main>
+</div>

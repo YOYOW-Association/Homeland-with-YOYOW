@@ -1,0 +1,21 @@
+production:
+  adapter: postgresql
+  encoding: utf-8
+  database: <%= ENV['db_name'] || 'dposclub' %>
+  username: <%= ENV['db_username'] || 'postgres' %>
+  password: <%= ENV['db_password'] || '' %>
+  host: <%= ENV['db_host'] || 'localhost' %>
+  port: <%= ENV['db_port'] || '5432' %>
+  pool: <%= ENV['db_pool'] || 64 %>
+
+development:
+  adapter: postgresql
+  encoding: utf-8
+  database: dposclub-dev
+  pool: 64
+
+test: &test
+  adapter: postgresql
+  encoding: utf-8
+  database: dposclub-test
+  pool: 64

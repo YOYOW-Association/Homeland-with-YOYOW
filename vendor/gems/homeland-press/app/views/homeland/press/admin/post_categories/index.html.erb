@@ -1,0 +1,26 @@
+<% content_for :sitemap do %>
+  <span class="current"><%= t('plugin.press') %></span>
+<% end %>
+
+<h4>分类列表</h4>
+<table class="table table-bordered table-striped table-condensed">
+<tr>
+  <th>#</th>
+  <th>分类名称</th>
+  <th hidden="hidden">更新时间</th>
+  <th style="width:100px">操作</th>
+</tr>
+<% @post_categories.each do |category| %>
+<tr class="admin_post_category_path">
+  <td><%= category.id %></td>
+  <td><%= category.name %></td>
+  <td><%= link_to "", admin_post_category_path(category), 'data-confirm' => 'Are you sure?', method: :delete, class: "fa fa-trash" %></td>
+</tr>
+<% end %>
+</table>
+<%= paginate @post_categories %>
+
+<p>
+  <h4>新建分类</h4>
+  <%= render 'form', category: @category %>
+</p>

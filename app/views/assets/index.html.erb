@@ -1,0 +1,50 @@
+<div id="assets">
+  <div class="card">
+    <div class="card-header">资产列表</div>
+    <div class="card-body">
+      <table class="table table-bordered table-striped table-condensed">
+        <thead>
+        <td>资产</td>
+        <td>数量</td>
+        <td>最近更新时间</td>
+        </thead>
+
+        <% @assets.each do |asset| %>
+          <tr>
+            <td><%= asset.asset_name %></td>
+            <td><%= asset.amount %></td>
+            <td><%= time_str asset.updated_at %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">资产变更历史</div>
+    <div class="card-body">
+      <table class="table table-bordered table-striped table-condensed">
+        <thead>
+        <td>资产</td>
+        <td>变更</td>
+        <td>类型</td>
+        <td>余额</td>
+        <td>操作人</td>
+        <td>变更时间</td>
+        </thead>
+
+        <% @logs.each do |log| %>
+          <tr>
+            <td><%= log.asset_name %></td>
+            <td><%= log.amount %></td>
+            <td><%= log.op_type_name %></td>
+            <td><%= log.balance %></td>
+            <td><%= log.operator %></td>
+            <td><%= time_str log.created_at %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+
+</div>

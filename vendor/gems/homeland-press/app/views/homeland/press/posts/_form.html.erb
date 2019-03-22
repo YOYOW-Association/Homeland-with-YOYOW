@@ -1,0 +1,69 @@
+<%= form_for post do |f| %>
+  <%= render "/shared/error_messages", target: post %>
+
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :post_category %>
+    <%= f.select(:post_category_id,
+                   PostCategory.all.collect{|category| ["#{category.name}", category.id]}, {:prompt => '请选择'}, :class => 'form-control') %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :slug %>
+    <%= f.text_field :slug, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label '封面图片' %>
+    <div class="input-group">
+      <div class="custom-file">
+        <%= f.text_field :cover_image, class: "form-control", placeholder: '请选择封面图片', readonly: true %>
+        <input class="custom-file-input" readonly="readonly" hidden="hidden" type="file" id="file-post_cover_image">
+      </div>
+      <div class="input-group-append">
+        <% if post.cover_image.nil? || post.cover_image.empty? %>
+          <div class="input-group-append">
+            <span class="btn btn-sm input-group-text text-info" id="btn-upload_cover_image">上传文件</span>
+          </div>
+        <% else %>
+          <span class="btn btn-sm input-group-text text-danger" id="btn-delete_cover_image">删除</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :pinned %>
+        <%= f.select(:pinned, [['是', 1], ['否', 0]], {:prompt => '请选择'}, :class => 'form-control')  %>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :rank %>
+        <%= f.text_field :rank, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :summary %>
+    <%= f.text_area :summary, class: "form-control" %>
+  </div>
+
+  <%= render "/shared/editor_toolbar" %>
+
+  <div class="form-group">
+    <%= f.text_area :body, class: 'topic-editor form-control', input_html: { rows: 20 } %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving"), 'data-tb' => "save-topic" %>
+  </div>
+<% end %>

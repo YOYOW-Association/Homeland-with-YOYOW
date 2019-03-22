@@ -1,0 +1,18 @@
+<% title_tag params[:id] %>
+
+<div id="users" class="box">
+  <div id="hot_users" class="card user-list">
+    <div class="card-header"><%= params[:id] %>的会员</div>
+    <div class="card-body row">
+      <% @users.each do |item| %>
+        <div class="user col-sm-1">
+          <div class="avatar"><%= user_avatar_tag(item, :md) %></div>
+          <div class="name"><%= user_name_tag(item) %></div>
+        </div>
+      <% end %>
+    </div>
+    <div class="card-footer clearfix">
+      <%= paginate @users %>
+    </div>
+  </div>
+</div>

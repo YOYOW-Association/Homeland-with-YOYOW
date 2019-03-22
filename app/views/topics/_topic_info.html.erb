@@ -1,0 +1,39 @@
+<div class="card-header media clearfix">
+  <div class="media-body">
+    <h1 class="media-heading">
+      <%= render_node_name(topic.node_name, topic.node_id) %>
+      <span class="title">
+        <%= topic.title %>
+      </span>
+      <%= topic_close_tag(topic) %>
+    </h1>
+    <% content_for :header do %>
+      <div class="navbar-topic-title">
+        <a href="#" class="topic-title pull-left" title="<%= topic.title %>" data-type="top">
+          <h1><span class="node"><%= topic.node_name %></span> <span class="title"><%= topic.title %><%= topic_close_tag(topic) %></span></h1>
+        </a>
+      </div>
+    <% end %>
+    <div class="info">
+      <%= user_name_tag(topic.user, data: { author: true }) %>
+      <span class="hidden-mobile">
+        <% if topic.team %>
+        for <%= user_name_tag(topic.team) %>
+        <% end %>
+      </span>
+       ·
+      <%= timeago(topic.created_at) %>
+      <% if !topic.last_reply_user_login.blank? %>
+      <span class="hidden-mobile">
+         ·
+        <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user_login) %> <%= raw t("common.reply_at", time: timeago(topic.replied_at))%>
+      <% end %>
+      </span>
+       ·
+      <%= topic.hits %> <%= t("common.read_times")%>
+    </div>
+  </div>
+  <div class="avatar media-right">
+    <%= user_avatar_tag(@topic.user, :md) %>
+  </div>
+</div>

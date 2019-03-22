@@ -1,0 +1,19 @@
+"zh-CN":
+  plugin:
+    site: 导航
+  simple_form:
+    hints:
+      site:
+        desc: '100字左右的介绍'
+        url: "别忘了要写 http:// 哦!"
+        favicon: '此网站的 Favicon，不填将会用 Google 来分析此网站的图标.'
+  activerecord:
+    models:
+      site: 导航
+      site_node: 导航分类
+    attributes:
+      site:
+        name: 网站名称
+        url: 地址
+        desc: 简单介绍
+        site_node_id: 分类

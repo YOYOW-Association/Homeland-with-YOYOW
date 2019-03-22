@@ -1,0 +1,6 @@
+<nav class="post-category d-none d-sm-block">
+  <a href="/" class="<%= @category_id.nil? ? "active":"" %>">全部</a>
+  <% PostCategory.all.each do |cate| %>
+    <a href="/?category_id=<%= cate.id %>" class="<%= category_id == cate.id.to_s ? "active":"" %>"><%= cate.name %></a>
+  <% end %>
+</nav>

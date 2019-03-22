@@ -1,0 +1,5 @@
+<% if current_page.first? %>
+  <%= link_to t('pagination.prev'), url, rel: 'prev', remote: remote, class: "item prev previous_page disabled" %>
+<% else %>
+  <%= link_to t('pagination.prev'), url, rel: 'prev', remote: remote, class: "item prev previous_page" %>
+<% end %>

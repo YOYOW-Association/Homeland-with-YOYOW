@@ -1,0 +1,16 @@
+<% title_tag [@user.fullname, t('users.menu.followers')].join(' · ') %>
+
+<div class="row">
+  <%= render "sidebar", user: @user %>
+  <div class="col-md-8">
+    <%= render "menu" %>
+    <div class="card">
+      <div class="card-body">
+        <%= render "user_list", users: @users %>
+      </div>
+      <div class="card-footer clearfix">
+        <%= paginate @users %>
+      </div>
+    </div>
+  </div>
+</div>

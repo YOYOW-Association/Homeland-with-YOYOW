@@ -1,0 +1,104 @@
+<% content_for :sitemap do %>
+  <span class="current"><%= t("admin.overview") %></span>
+<% end %>
+
+
+<div class="toolbar">
+  <div class="btn-group">
+    <a href="/admin/site_configs" class="btn btn-default"><i class="fa fa-cogs"></i> <%= t("admin.site_configs.settings") %></a>
+    <a href="/admin/applications" class="btn btn-default"><i class="fa fa-cubes"></i> 三方应用</a>
+    <a href="/sidekiq" class="btn btn-default" target="_blank"><i class="fa fa-tasks"></i> 异步任务...</a>
+    <a href="/pghero" class="btn btn-default" target="_blank"><i class="fa fa-database"></i> 数据库状态...</a>
+    <a href="/exception-track" class="btn btn-default" target="_blank"><i class="fa fa-warning"></i> <%= t("admin.menu.exception_logs") %>...</a>
+  </div>
+</div>
+
+<div class="clearfix">
+  <div class="row">
+    <div class="col-sm-4" id="user-stat">
+      <div class="stat">
+        <div class="total">0</div>
+        <div class="name">
+          用户总数
+          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
+          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4" id="topic-stat">
+      <div class="stat">
+        <div class="total">0</div>
+        <div class="name">
+          话题总数
+          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
+          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4" id="reply-stat">
+      <div class="stat">
+        <div class="total">0</div>
+        <div class="name">
+          回帖总数
+          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
+          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3" id="notification-stat">
+      <div class="stat">
+        <div class="total">0</div>
+        <div class="name">
+          通知总数
+          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
+          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-3" id="comment-stat">
+      <div class="stat">
+        <div class="total">0</div>
+        <div class="name">
+          评论总数
+          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
+          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-sm-3" id="photo-stat">
+      <div class="stat">
+        <div class="total">0</div>
+        <div class="name">
+          照片总数
+          <span class="total-week" rel="twipsy" title="本周新增">+0</span>
+          <span class="total-month" rel="twipsy" title="本月新增">+0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    function updateStatValue(data) {
+      var el = $('#' + data.model + '-stat');
+      el.find(".total").text(data.count);
+      el.find(".total-week").text('+' + data.week_count);
+      el.find(".total-month").text('+' + data.month_count);
+    }
+
+    var models = ['user', 'topic', 'reply', 'note', 'notification', 'photo', 'comment'];
+    for (var i = 0; i < models.length; i ++) {
+      var model = models[i];
+      $.get("/admin/stats?model="+ model +"&by=month", function(data) {
+        updateStatValue(data)
+      });
+    }
+  </script>
+</div>
+

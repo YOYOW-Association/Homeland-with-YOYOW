@@ -1,0 +1,28 @@
+"zh-CN":
+  plugin:
+    press: "头条"
+  activerecord:
+    models:
+      post: "文章"
+    attributes:
+      post:
+        title: 标题
+        post_category: 文章分类
+        cover_image: 封面图片
+        slug: 自定义URL
+        body: 正文
+        rank: 排序(置顶后生效, 由大到小排序)
+        pinned: 置顶🔝
+        summary: 摘要
+      post_category:
+        name: 分类名称
+  simple_form:
+    hints:
+      post:
+        title: "请给文章起一个简短准确的标题，注意正确的英文名词拼写、大小写！"
+        slug: "文章的 URL 名称，也可以保持为空，这样将会用文章编号代替，例如 /posts/this-is-slug-for-use"
+        body: "用 Markdown 语法编写文章正文"
+        summary: "如果可以的话，用一段简短的文字描述此文的重点内容"
+    placeholders:
+      post:
+        slug: ""

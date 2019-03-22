@@ -1,0 +1,10 @@
+<div class="secondary-banner d-none d-lg-block ">
+  <% posts.each do |post| %>
+    <div class="item" style="background-image: url(<%= post.cover_image %>)">
+      <p class="title">
+        <%= post.summary %>
+      </p>
+      <%= link_to '', "/posts/#{post.to_param}", class: 'link' %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,28 @@
+<% title_tag t('plugin.site') %>
+
+<div id="site_nodes">
+  <% if can? :create, ::Site %>
+  <div class="card">
+    <div class="card-body">
+      <%= raw Setting.site_index_html %>
+      <%= link_to('提交导航', new_site_path, class: "btn btn-primary")%>
+    </div>
+  </div>
+  <% end %>
+
+  <% cache(["plugin/sites", t: CacheVersion.sites_updated_at, d: Date.today]) do %>
+    <% @site_nodes.each do |node| %>
+    <div class="card">
+      <div class="card-header"><%= node.name %></div>
+      <div class="card-body row">
+        <% node.sites.each do |item| %>
+        <div class="col-md-3 site">
+          <%= image_tag(item.favicon_url, class: "favicon", style: "width: 16px; height: 16px;")%>
+          <%= link_to item.name, item.url, target: "_blank", rel: "twipsy", title: item.desc %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+</div>

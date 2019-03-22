@@ -1,0 +1,17 @@
+<% title_tag t('teams.users') %>
+
+<%= render '/teams/header' %>
+
+<div class="card team-users">
+  <% if can? :update, @team %>
+  <div class="card-header"><%= link_to t('teams.new_team_user'), new_user_team_user_path(@team), class: 'btn btn-default' %></div>
+  <% end %>
+  <div class="card-body">
+    <table class="table table-striped">
+      <%= render partial: '/team_users/team_user', collection: @team_users %>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= paginate @team_users %>
+  </div>
+</div>

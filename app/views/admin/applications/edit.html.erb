@@ -1,0 +1,39 @@
+<% content_for :sitemap do %>
+  <a href="<%= admin_applications_path %>">OAuth 应用</a> <i class="fa fa-angle-right"></i> <span class="current">编辑</span>
+<% end %>
+
+<%= form_for [:admin, @application], url: admin_application_path(@application) do |f| %>
+  <%= render "/shared/error_messages", target: @application %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :redirect_uri %>
+    <%= f.text_field :redirect_uri, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :level %>
+    <%= f.text_field :level, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label class="form-check-label">
+      <%= f.check_box :confidential %>
+      <%= f.label :confidential %>
+    </label>
+    <span class="form-text">
+      <%= raw t('doorkeeper.applications.help.confidential') %>
+    </span>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "保存", class: "btn btn-primary", 'data-disable-with' => "Saving..." %>
+    <%= link_to '取消', admin_applications_path, class: "btn" %>
+    <span class="pull-right">
+      <%= link_to "删除", admin_application_path(@application.id), class: 'btn btn-danger', method: :delete, 'data-confirm' => '确定要删除吗?' %>
+    </span>
+  </div>
+<% end %>

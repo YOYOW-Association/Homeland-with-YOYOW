@@ -1,0 +1,27 @@
+"zh-CN":
+  admin:
+    menu:
+      root_path: "概况"
+      site_configs: "设置"
+      users: "用户"
+      pending_assets: "资产"
+      sections: "分类"
+      nodes: "节点"
+      wiki: "Wiki"
+      topics: "话题"
+      replies: "回复"
+      photos: "图片"
+      comments: "评论"
+      locations: "城市"
+      exception_logs: "异常"
+    overview: "概览"
+    recent_topics: "最近帖子"
+    statics: "统计信息"
+    site_configs:
+      settings: "全局设置"
+      please_do_not_modify_key: "请勿修改 key"
+      edit_setting: "修改设置"
+    users:
+      trust_user_can_modify_wiki: "信任用户将可以修改 Wiki"
+    topic_list: "话题列表"
+    check_photo: "瀏覽圖片"

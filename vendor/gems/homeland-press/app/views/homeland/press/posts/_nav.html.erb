@@ -1,0 +1,6 @@
+<nav class="post-category d-none d-sm-block">
+  <%=link_to '全部', posts_path, class: @category_id.nil? ? "active":"" %>
+  <% PostCategory.all.each do |cate| %>
+    <%= link_to cate.name, posts_path(category_id: cate.id), class: category_id == cate.id.to_s ? "active":"" %>
+  <% end %>
+</nav>

@@ -1,0 +1,50 @@
+<%#= render "topics/node_info", node: @node %>
+<% if node.blank? %>
+  <%#= render 'node_selector' %>
+  <div class="card">
+    <div class="sidebar-list">
+      <a class="<%= ' active' if action_name == 'index' %>"
+         href="<%= main_app.topics_path %>"
+         data-turbolinks-action="replace">
+        <i class="fa fa-align-right"></i> 全部
+      </a>
+      <a class="<%= ' active' if action_name == 'excellent' %>"
+         href="<%= main_app.excellent_topics_path %>"
+         data-turbolinks-action="replace">
+        <i class="fa fa-diamond"></i> 精华帖
+      </a>
+      <ul class="menu-list">
+        <%= link_to('优质话题', main_app.popular_topics_path, data: {'turbolinks-action': 'replace'},
+                    class: action_name == 'popular' ? ' active' : '') %>
+        <% if can?(:mange, Topic) %>
+          <%= link_to('已屏蔽', main_app.banned_topics_path, data: {'turbolinks-action': 'replace'},
+                      class: action_name == 'banned' ? ' active' : '') %>
+        <% end %>
+        <%= link_to('最新回复', main_app.last_reply_topics_path, data: {'turbolinks-action': 'replace'},
+                    class: action_name == 'last_reply' ? ' active' : '') %>
+        <%= link_to('最新发布', main_app.last_topics_path, data: {'turbolinks-action': 'replace'},
+                    class: action_name == 'last' ? ' active' : '') %>
+        <%= link_to('无人问津', main_app.no_reply_topics_path, data: {'turbolinks-action': 'replace'},
+                    class: action_name == 'no_reply' ? ' active' : '') %>
+      </ul>
+    </div>
+  </div>
+
+  <%#= render "node_selector"%>
+  <%= render "shared/node_sort"%>
+  <%= render "topics/sidebar_box_tips" %>
+  <%= raw Setting.topic_index_sidebar_html %>
+
+  <% cache(["sidebar_statistics", Time.now.strftime("%Y-%m-%d %H")]) do %>
+    <div class="card">
+      <div class="card-header"><%= t("common.statics") %></div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">社区会员: <%= User.unscoped.count %> 人</li>
+        <li class="list-group-item">帖子数: <%= Topic.unscoped.count %> 个</li>
+        <li class="list-group-item">回帖数: <%= Reply.unscoped.count %> 条</li>
+      </ul>
+    </div>
+  <% end %>
+
+<% end %>
+

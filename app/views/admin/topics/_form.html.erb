@@ -1,0 +1,29 @@
+<%= form_for [:admin,@topic] do |f| %>
+  <%= render 'shared/error_messages', target: @topic %>
+
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :node_id %>
+    <%= f.text_field :node_id, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :user_id %>
+    <%= f.text_field :user_id, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: "form-control" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving") %>
+    or
+    <%= link_to 'Back', admin_topics_path %>
+  </div>
+<% end %>

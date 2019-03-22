@@ -1,0 +1,46 @@
+<% title_tag t("users.register_user") %>
+
+<div class="row">
+  <div class="col"></div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header"><%= t("users.register_user")%></div>
+      <div class="card-body">
+        <%= form_for resource, as: resource_name, url: registration_path(resource_name), remote: true do |f| %>
+        <div class="form-group">
+          <%= f.text_field :login, class: "form-control input-lg", placeholder: t("users.login"), hint: t("users.suggest_using_twitter_id") %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :name, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.name") %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :email, type: :email, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.email") %>
+        </div>
+        <div class="form-group form-check">
+          <label for="user_email_public" class="form-check-label">
+            <%= f.check_box :email_public, checked: true, class: "form-check-input" %> <%= t("activerecord.attributes.user.email_public") %>
+          </label>
+        </div>
+        <div class="form-group">
+        <%= f.password_field :password, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.password") %>
+        </div>
+        <div class="form-group">
+        <%= f.password_field :password_confirmation, class: "form-control input-lg", placeholder: t("activerecord.attributes.user.password_confirmation") %>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <%= rucaptcha_input_tag(class: 'form-control input-lg', placeholder: t('common.captcha')) %>
+            <span class="input-group-addon input-group-captcha"><a class="rucaptcha-image-box" href="#"><%= rucaptcha_image_tag %></a></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit t('users.submit_new_user'), class: "btn btn-lg btn-primary", 'data-disable-with' => t("common.submitting") %>
+          <%= link_to t("common.login"), new_session_path(resource_name), class: "btn btn-lg btn-default hide-ios" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col"></div>
+</div>

@@ -1,0 +1,14 @@
+<% content_for :stylesheets do %>
+  <%= stylesheet_link_tag "homeland/site/application", media: "all" %>
+<% end %>
+
+<% content_for :javascripts do %>
+<% end %>
+
+<% content_for :main do %>
+  <div id="homeland-site">
+    <%= yield %>
+  </div>
+<% end %>
+
+<%= render template: "/layouts/application" %>

@@ -1,0 +1,12 @@
+<%= form_for [:admin, category] do |f| %>
+  <%= render "/shared/error_messages", target: category %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit t("common.save"), class: "btn btn-primary", 'data-disable-with' => t("common.saving"), 'data-tb' => "save-topic" %>
+  </div>
+<% end %>

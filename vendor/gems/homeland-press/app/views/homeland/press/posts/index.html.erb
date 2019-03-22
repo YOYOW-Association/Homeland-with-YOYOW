@@ -1,0 +1,128 @@
+<% title_tag t('plugin.press') %>
+
+<!--<div class="row">-->
+<!--  <div class="col-md-9">-->
+<!--    <div id="post-list" class="card post-<%#= action_name %>">-->
+<!--      <div class="card-body">-->
+        <%# if @posts.blank? %>
+<!--          <div class="no-result">暂无任何文章</div>-->
+        <%# else %>
+          <%#= render partial: 'post', collection: @posts %>
+        <%# end %>
+<!--      </div>-->
+<!--      <div class="card-footer">-->
+        <%#= paginate @posts %>
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+  <%#= render 'sidebar' %>
+<!--</div>-->
+
+<% if !mobile? %>
+  <div class="hide-ios">
+    <%= raw Setting.index_html %>
+  </div>
+<% end %>
+<div class="home">
+  <!--  左侧区域开始-->
+  <div class="wrapper">
+    <!--顶部推荐文章开始-->
+    <%= render 'carousel', posts: @carousel_posts %>
+    <%= render 'cards', posts: @card_posts %>
+    <!--顶部推荐文章结束-->
+
+    <!--左侧分类文章开始-->
+    <div class="home-content">
+      <main>
+        <!--文章导航-->
+        <%= render 'nav', category_id: @category_id %>
+        <!--文章列表-->
+        <%= render 'posts', posts: @posts %>
+        <!--大屏分页-->
+        <%= paginate @posts, theme: 'round_theme' %>
+        <!--小屏分页-->
+        <%= paginate @posts, theme: 'round_theme_mobile' %>
+      </main>
+    </div>
+    <!--分类文章结束-->
+  </div>
+  <!--  左侧区域结束-->
+
+  <!--右侧区域开始-->
+  <div class="sidebar-wrapper">
+    <aside class="home-sidebar d-none d-sm-block">
+
+      <!-- 发表新头条开始-->
+      <% if can? :create, Post %>
+        <div class="card">
+          <div class="card-body">
+              <%= link_to "提交新文章", new_post_path, class: 'btn btn-block btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+      <!-- 发表新头条结束-->
+
+      <!--    活动通知开始-->
+      <div class="card activity-notice hidden" hidden="hidden">
+        <div class="card-header notice-header">
+          <i class="fa fa-calendar-minus-o"></i> 公告 <span class="notice-time">2018.11.1 发布</span>
+        </div>
+        <div class="card-body notice-img">
+          dpos.club 建立最好的DPoS中文技术社区
+        </div>
+      </div>
+      <!--    活动通知结束-->
+
+      <!--    右侧广告位开始-->
+      <section class="sidebar-partner box">
+        <header>生态伙伴</header>
+        <a class="item" href="https://yoyow.org" target="_blank" title="https://yoyow.org">
+          <%= image_tag 'https://l.dpos.club/yoyow.jpeg', class: "cover vertical-center" %>
+        </a>
+
+        <a class="item" href="https://www.biask.com" target="_blank" title="https://www.biask.com">
+          <%= image_tag 'https://l.dpos.club/biask.jpeg', class: "cover vertical-center" %>
+        </a>
+      </section>
+      <!--    右侧广告位结束-->
+      <!--    热议主题开始-->
+      <section class="hot box">
+        <header>社区热议主题</header>
+        <% @topics.each do |topic|%>
+          <article class="media">
+            <%= user_avatar_tag(topic.user, :md) %>
+            <div class="media-body">
+              <a href="<%= main_app.topic_path(topic) %>"><%= topic.title %></a>
+              <%= user_name_tag(topic.user, class: 'name') %>
+            </div>
+          </article>
+        <% end %>
+      </section>
+      <!--    订阅开始-->
+      <section class="sidebar-subscribe hidden" hidden="hidden">
+        <header>订阅精选资讯和热门话题</header>
+        <form action="//ethfans.us11.list-manage.com/subscribe/post?u=ac1d82045d267e799747892fc&amp;id=232b99ceb5" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+          <input class="form-control" type="email" name="EMAIL" placeholder="Email Addres">
+
+          <div id="mce-responses" class="clear">
+            <div class="response" id="mce-error-response" style="display:none"></div>
+            <div class="response" id="mce-success-response" style="display:none"></div>
+          </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+
+          <div style="position: absolute; left: -5000px;" aria-hidden="true">
+            <input type="text" name="b_ac1d82045d267e799747892fc_232b99ceb5" tabindex="-1" value="">
+          </div>
+
+          <button type="submit" class="btn btn-primary">订阅</button>
+        </form>
+      </section>
+
+    </aside>
+  </div>
+</div>
+
+<% if !mobile? %>
+  <div class="hide-ios">
+    <%= raw Setting.index_html %>
+  </div>
+<% end %>

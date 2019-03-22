@@ -1,0 +1,65 @@
+<% content_for :sitemap do %>
+  <span class="current">用户</span>
+<% end %>
+
+
+<% if @user %>
+  <p>
+    <%= link_to '查看全部用户', admin_pending_assets_path, class: 'btn btn-default' %>
+  </p>
+  <div class="toolbar">
+    <%= render 'form', asset: @user.pending_assets.new %>
+  </div>
+<% end %>
+
+<h3>资产列表</h3>
+<table class="table table-bordered table-striped table-condensed">
+  <thead>
+    <td>帐号</td>
+    <td>资产</td>
+    <td>数量</td>
+    <td>最近更新时间</td>
+<!--    <td>操作</td>-->
+  </thead>
+
+<% @assets.each do |asset| %>
+  <tr>
+    <td><%= link_to asset.user.login, admin_pending_assets_path(user_id: asset.user.id) %></td>
+    <td><%= asset.asset_name %></td>
+    <td><%= asset.amount %></td>
+    <td><%= time_str asset.updated_at %></td>
+    <td>
+      <%#=  link_to '删除', admin_pending_assets_path(user_id: asset.user_id),
+                   'data-confirm' => '警告！此动作无法撤销，确定要删除么?',
+                   method: :delete, class: "" %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+
+<h3>资产变更历史</h3>
+<table class="table table-bordered table-striped table-condensed">
+  <thead>
+    <td>帐号</td>
+    <td>资产</td>
+    <td>变更</td>
+    <td>类型</td>
+    <td>余额</td>
+    <td>操作人</td>
+    <td>变更时间</td>
+  </thead>
+
+<% @logs.each do |log| %>
+  <tr>
+    <td><%= link_to log.user.login, admin_pending_assets_path(user_id: log.user.id) %></td>
+    <td><%= log.asset_name %></td>
+    <td><%= log.amount %></td>
+    <td><%= log.op_type_name %></td>
+    <td><%= log.balance %></td>
+    <td><%= log.operator %></td>
+    <td><%= time_str log.created_at %></td>
+  </tr>
+<% end %>
+</table>
+<%#= paginate @assets %>

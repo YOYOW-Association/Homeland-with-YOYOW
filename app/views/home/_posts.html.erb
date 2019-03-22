@@ -1,0 +1,15 @@
+<div class="post-list">
+  <% posts.each do |post| %>
+    <article class="post-item">
+      <img class="post-cover" src="<%= post.cover_image %>" alt="">
+      <div class="post-info">
+        <a class="title" href="/posts/<%= post.to_param %>"><%= post.title %></a>
+        <p class="description d-none d-sm-block"><%= post.summary %></p>
+        <div class="meta">
+          <%= link_to user_name_tag(post.user), post.user %> ·
+          <time><%= l post.updated_at, format: :short %></time>
+        </div>
+      </div>
+    </article>
+  <% end %>
+</div>

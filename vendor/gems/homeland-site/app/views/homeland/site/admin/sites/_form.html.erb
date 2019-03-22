@@ -1,0 +1,28 @@
+<%= form_for [:admin, @site] do |f| %>
+  <%= render "/shared/error_messages", target: @site  %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :url %>
+    <%= f.url_field :url, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :url %>
+    <%= f.select :site_node_id, SiteNode.all.collect { |t| [t.name, t.id] }, { include_blank: false }, { class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :desc %>
+    <%= f.text_area :desc, class: "form-control", rows: 3 %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit '保存', class: "btn btn-primary", 'data-disable-with' => '保存中...' %>
+    <%= link_to '取消', admin_sites_path, class: "btn btn-outline-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,17 @@
+<% title_tag [@user.fullname, t('users.menu.blocked')].join(' · ') %>
+
+<div class="row">
+  <%= render "sidebar", user: @user %>
+  <div class="col-md-8">
+    <%= render "menu" %>
+    <div class="card bloced-users">
+      <div class="card-header"><%= t('users.menu.blocked') %></div>
+      <div class="card-body">
+        <%= render "user_list", users: @block_users %>
+      </div>
+      <div class="card-footer clearfix">
+        <%= paginate @block_users %>
+      </div>
+    </div>
+  </div>
+</div>

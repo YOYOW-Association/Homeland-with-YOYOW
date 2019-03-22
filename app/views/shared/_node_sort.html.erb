@@ -1,0 +1,17 @@
+<% cache(["index_locations", CacheVersion.section_node_updated_at]) do %>
+  <div class="index-sections card">
+    <div class="card-header"><%= t("common.index_node_navigation") %></div>
+    <div class="card-body">
+      <% Section.includes(:nodes).all.each do |section| %>
+        <div class="section">
+            <span class="section-name"><%= section.name %></span>
+          <div class="section-nodes">
+            <% section.nodes.sorted.each do |node| %>
+              <span class="name"><%= link_to(node.name, node_topics_path(node), title: node.name, data: {id: node.id}) %></span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

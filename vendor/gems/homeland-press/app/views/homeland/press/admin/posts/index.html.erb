@@ -1,0 +1,39 @@
+<% content_for :sitemap do %>
+  <span class="current"><%= t('plugin.press') %></span>
+<% end %>
+
+<p>
+  <%= link_to '发布头条', new_post_path, class: 'btn btn-primary' %>
+  <%= link_to '管理头条分类', admin_post_categories_path, class: 'btn btn-primary' %>
+</p>
+
+<h4>头条列表</h4>
+<table class="table table-bordered table-striped table-condensed">
+<tr>
+  <th>#</th>
+  <th>状态</th>
+  <th>标题</th>
+  <th>提交人</th>
+  <th>更新时间</th>
+  <th>置顶?</th>
+  <th>排序</th>
+  <th style="width:100px">操作</th>
+</tr>
+<% @posts.each do |post| %>
+<tr class="post">
+  <td><%= post.id %></td>
+  <td><%= post.status %></td>
+  <td class="title"><%= link_to post.title, post %></td>
+  <td class="author"><%= user_name_tag(post.user) %></td>
+  <td class="time"><%= l post.updated_at, format: :long %></td>
+  <td class=""><%= ['否', '是'][post.pinned.to_i] %></td>
+  <td class=""><%= post.rank %></td>
+  <td>
+    <%= link_to "删除", admin_post_path(post), 'data-confirm' => 'Are you sure?', method: :delete, class: "" %>
+    <%= link_to "置顶", admin_post_path(post), 'data-confirm' => 'Are you sure?', method: :delete, class: "" %>
+  </td>
+</tr>
+<% end %>
+</table>
+
+<%= paginate @posts %>

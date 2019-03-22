@@ -1,0 +1,19 @@
+<%= form_for [:admin, @site_node] do |f| %>
+  <%= render "/shared/error_messages", target: @site_node  %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :sort %>
+    <%= f.text_field :sort, class: "form-control" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit '保存', class: "btn btn-primary", 'data-disable-with' => '保存中...' %>
+    <%= link_to '取消', admin_site_nodes_path, class: "btn btn-outline-primary" %>
+  </div>
+<% end %>
+
