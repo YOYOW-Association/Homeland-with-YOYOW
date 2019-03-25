@@ -2,13 +2,13 @@
 
 本项目是 [DPoS Club](https://dpos.club) 源码基于[MIT](www.opensource.org/licenses/MIT) 协议的开源版本，可以通过<https://dpos.club>预览最终效果。
 
-DPoS Club <https://dpos.club> 是一个讨论基于DPoS共识的区块链技术社区。网站基于开源的论坛系统[Homeland](https://github.com/ruby-china/homeland)搭建，并通过[YOYOW中间件](https://github.com/yoyow-org/yoyow-middleware)与YOYOW链上数据（比如账号体系）进行绑定。
+DPoS Club <https://dpos.club> 是一个讨论基于DPoS共识的区块链技术社区。Homeland Integrated with YOYOW基于开源的论坛系统[Homeland](https://github.com/ruby-china/homeland)搭建，并通过[YOYOW中间件](https://github.com/yoyow-org/yoyow-middleware)与YOYOW链上数据（比如账号体系）进行绑定。
 
 现将所有代码开源，欢迎提Issue。
 
 ## 功能
 
-DPoS Club 在Homeland的基础上，主要添加如下功能：
+Homeland Integrated with YOYOW在Homeland的基础上，主要添加如下功能：
 
 * 通过YOYOW中间件，添加YOYOW账号绑定
 * 通过YOYOW中间件，实现通过YOYOW账号登录
@@ -75,4 +75,4 @@ ngnix 配置示例可以参考 文件 dposclub.conf.nginx。
 
 ## 版权许可
 
-DPoS Club 基于 [MIT](www.opensource.org/licenses/MIT) 协议开源，
+Homeland Integrated with YOYOW 基于 [MIT](www.opensource.org/licenses/MIT) 协议开源，
